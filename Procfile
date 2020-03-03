@@ -1,1 +1,1 @@
-web: gunicorn adv_project.wsgi:application --log-file -
+web: python manage.py collectstatic --no-input; gunicorn adv_project.wsgi:application
