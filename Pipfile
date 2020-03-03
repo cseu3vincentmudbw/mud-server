@@ -18,6 +18,8 @@ environ = "*"
 psycopg2 = "*"
 dj-database-url = "*"
 django-toolbelt = "*"
+coreapi = "*"
+pyyaml = "*"
 
 [dev-packages]
 
