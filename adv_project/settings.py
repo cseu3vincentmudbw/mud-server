@@ -179,8 +179,8 @@ STATICFILES_DIRS = [
 ]
     
 
-# import django_heroku
-# django_heroku.settings(locals())
+import django_heroku
+django_heroku.settings(locals())
 
 if ENV_ROLE == 'production':
     import dj_database_url
