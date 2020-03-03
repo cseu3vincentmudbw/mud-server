@@ -17,6 +17,7 @@ django-rest-api = "*"
 environ = "*"
 psycopg2 = "*"
 dj-database-url = "*"
+django-toolbelt = "*"
 
 [dev-packages]
 
