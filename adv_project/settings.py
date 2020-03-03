@@ -28,9 +28,11 @@ SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
+DB_PASSWORD = False
 
 if ENV_ROLE == 'development':
     DEBUG = True
+    DB_PASSWORD = config('DB_PASSWORD')
 
 ALLOWED_HOSTS = ['*']
 
@@ -108,7 +110,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'lambda_mud_db',
         'USER': 'jp',
-        'PASSWORD': config('DB_PASSWORD'),
+        'PASSWORD': DB_PASSWORD,
         'HOST': 'localhost',
         'PORT': '5432',
     }
