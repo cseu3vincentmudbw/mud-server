@@ -15,9 +15,13 @@ activate
 pip install -r requirements.txt
 `
 
+`python manage.py migrate`
+
+
 `python manage.py runserver`
 
 # Usage
+
 
 > To get the current position of a player, use the `api/adv/init` endpoint
 
@@ -35,6 +39,8 @@ curl -X GET -H 'Authorization: Token 6b7b9d0f33bd76e75b0a52433f268d3037e42e66' l
 {"uuid": "c3ee7f04-5137-427e-8591-7fcf0557dd7b", "name": "testuser", "title": "Outside Cave Entrance", "description": "North of you, the cave mount beckons", "players": []}
 ```
 
+
+
 > To move to the next room, use the `/api/adv/move/` endpoint
 
 ### Example
@@ -44,12 +50,22 @@ curl -X GET -H 'Authorization: Token 6b7b9d0f33bd76e75b0a52433f268d3037e42e66' l
 curl -X POST -H 'Authorization: Token 6b7b9d0f33bd76e75b0a52433f268d3037e42e66' -H "Content-Type: application/json" -d '{"direction":"n"}' localhost:8000/api/adv/move/
 ```
 
+sample payload 
+
+```
+{"direction":"n"}
+```
+
 * Sample Response
 ```
 {"name": "testuser", "title": "Foyer", "description": "Dim light filters in from the south. Dusty\npassages run north and east.", "players": [], "error_msg": ""}
 ```
 
 > To get all the roooms, use the `/api/adv/rooms`
+
+```
+curl -X POST -H 'Authorization: Token 6b7b9d0f33bd76e75b0a52433f268d3037e42e66' -H "Content-Type: application/json" localhost:8000/api/adv/rooms/
+```
 
 
 
