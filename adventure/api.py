@@ -5,14 +5,18 @@ from django.http import JsonResponse
 from decouple import config
 from django.contrib.auth.models import User
 from .models import Player, Room
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 import json
 
 # instantiate pusher
 # pusher = Pusher(app_id=config('PUSHER_APP_ID'), key=config('PUSHER_KEY'), secret=config('PUSHER_SECRET'), cluster=config('PUSHER_CLUSTER'))
 
-@csrf_exempt
+# @csrf_exempt
 @api_view(["GET"])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 def initialize(request):
     """
     Get the current position of the player
@@ -28,6 +32,8 @@ def initialize(request):
 
 # @csrf_exempt
 @api_view(["POST"])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 def move(request):
     """
     Move the player in a particular direction
