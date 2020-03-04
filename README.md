@@ -1,5 +1,22 @@
 # CS Build Week 1
 
+
+# setup
+
+Create a virtual environment
+
+`python -m venv venv`
+
+activate
+
+`source venv/bin/activate`
+
+`
+pip install -r requirements.txt
+`
+
+`python manage.py runserver`
+
 # Usage
 
 > To get the current position of a player, use the `api/adv/init` endpoint
@@ -32,7 +49,7 @@ curl -X POST -H 'Authorization: Token 6b7b9d0f33bd76e75b0a52433f268d3037e42e66' 
 {"name": "testuser", "title": "Foyer", "description": "Dim light filters in from the south. Dusty\npassages run north and east.", "players": [], "error_msg": ""}
 ```
 
-> To get all the roooms
+> To get all the roooms, use the `/api/adv/rooms`
 
 
 
@@ -229,7 +246,7 @@ Note that all the Pusher parts are stretch.
 
 ### 1. Can you show me an example of a map visualization?
 
-Here's a sample project created by [a team in CSPT2](https://confident-wright-ca0176.netlify.com): 
+Here's a sample project created by [a team in CSPT2](https://confident-wright-ca0176.netlify.com):
 
 ![Lambda MUD 1](img/pt2_lambdamud.png)
 
@@ -272,4 +289,3 @@ It's up to you what data the request will return but the API request should be s
 ```
 curl -X GET -H 'Authorization: Token cc504e88ef659843b858d61c101ca9d4f0edf979' http://lambda-mud-test.herokuapp.com/api/adv/rooms/
 ```
-
