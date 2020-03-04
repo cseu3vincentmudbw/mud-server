@@ -10,6 +10,15 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 import json
 
+from api.serializers import RoomSerializer, PlayerSerializer
+
+
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
+
+#player_direction_param = openapi.Parameter('direction', openapi.IN_QUERY, description="diretion param")
+player_response = openapi.Response("Get the current position of the player", PlayerSerializer)
+
 # instantiate pusher
 # pusher = Pusher(app_id=config('PUSHER_APP_ID'), key=config('PUSHER_KEY'), secret=config('PUSHER_SECRET'), cluster=config('PUSHER_CLUSTER'))
 
