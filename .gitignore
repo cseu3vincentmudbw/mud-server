@@ -14,5 +14,4 @@ db.sqlite3
 
 tmp
 .vscode/
-
-requirements.txt
+venv/

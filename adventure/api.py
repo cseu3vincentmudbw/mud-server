@@ -4,7 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from decouple import config
 from django.contrib.auth.models import User
-from .models import *
+from .models import Player, Room
 from rest_framework.decorators import api_view
 import json
 
@@ -14,6 +14,9 @@ import json
 @csrf_exempt
 @api_view(["GET"])
 def initialize(request):
+    """
+    Get the current position of the player
+    """
     user = request.user
     player = user.player
     player_id = player.id
@@ -26,6 +29,9 @@ def initialize(request):
 # @csrf_exempt
 @api_view(["POST"])
 def move(request):
+    """
+    Move the player in a particular direction
+    """
     dirs={"n": "north", "s": "south", "e": "east", "w": "west"}
     reverse_dirs = {"n": "south", "s": "north", "e": "west", "w": "east"}
     player = request.user.player

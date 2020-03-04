@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'rest_auth',
+    'drf_yasg',
     'allauth',
     'allauth.account',
     'rest_auth.registration',
@@ -177,10 +178,10 @@ STATIC_URL = '/static/'
 # STATICFILES_DIRS = [
 #     os.path.join(BASE_DIR, 'static'),
 # ]
-    
 
-import django_heroku
-django_heroku.settings(locals())
+if ENV_ROLE == 'production':
+    import django_heroku
+    django_heroku.settings(locals())
 
 if ENV_ROLE == 'production':
     import dj_database_url
