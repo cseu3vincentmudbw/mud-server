@@ -1,5 +1,101 @@
 # CS Build Week 1
 
+
+# setup
+
+Create a virtual environment
+
+`python -m venv venv`
+
+activate
+
+`source venv/bin/activate`
+
+`
+pip install -r requirements.txt
+`
+
+`python manage.py migrate`
+
+
+`python manage.py runserver`
+
+# Usage
+
+
+> To get the current position of a player, use the `api/adv/init` endpoint
+
+### Example
+
+* Request
+
+```
+curl -X GET -H 'Authorization: Token 6b7b9d0f33bd76e75b0a52433f268d3037e42e66' localhost:8000/api/adv/init/
+```
+
+* Response
+
+```
+{"uuid": "c3ee7f04-5137-427e-8591-7fcf0557dd7b", "name": "testuser", "title": "Outside Cave Entrance", "description": "North of you, the cave mount beckons", "players": []}
+```
+
+
+
+> To move to the next room, use the `/api/adv/move/` endpoint
+
+### Example
+* Request
+
+```
+curl -X POST -H 'Authorization: Token 6b7b9d0f33bd76e75b0a52433f268d3037e42e66' -H "Content-Type: application/json" -d '{"direction":"n"}' localhost:8000/api/adv/move/
+```
+
+sample payload 
+
+```
+{"direction":"n"}
+```
+
+* Sample Response
+```
+{"name": "testuser", "title": "Foyer", "description": "Dim light filters in from the south. Dusty\npassages run north and east.", "players": [], "error_msg": ""}
+```
+
+> To get all the roooms, use the `/api/adv/rooms`
+
+```
+curl -X POST -H 'Authorization: Token 6b7b9d0f33bd76e75b0a52433f268d3037e42e66' -H "Content-Type: application/json" localhost:8000/api/adv/rooms/
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 For your first CS Build Week, you will be building an interactive ***Multi-User Dungeon (MUD)*** client and server in groups. To succeed with this project, you will be applying knowledge you've learned throughout the first part of CS to this project.
 
 You should treat this like a real-world job assignment with your instructor as the client. Like in the real world, you may not be given all the information you need to complete the assignment up front. It is your responsibility to understand the requirements and ask questions if anything is unclear (UPER) before jumping into the code.
@@ -166,7 +262,7 @@ Note that all the Pusher parts are stretch.
 
 ### 1. Can you show me an example of a map visualization?
 
-Here's a sample project created by [a team in CSPT2](https://confident-wright-ca0176.netlify.com): 
+Here's a sample project created by [a team in CSPT2](https://confident-wright-ca0176.netlify.com):
 
 ![Lambda MUD 1](img/pt2_lambdamud.png)
 
@@ -209,4 +305,3 @@ It's up to you what data the request will return but the API request should be s
 ```
 curl -X GET -H 'Authorization: Token cc504e88ef659843b858d61c101ca9d4f0edf979' http://lambda-mud-test.herokuapp.com/api/adv/rooms/
 ```
-

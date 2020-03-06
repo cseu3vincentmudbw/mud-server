@@ -4,16 +4,32 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from decouple import config
 from django.contrib.auth.models import User
-from .models import *
-from rest_framework.decorators import api_view
+from .models import Player, Room
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 import json
+
+from api.serializers import RoomSerializer, PlayerSerializer
+
+
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
+
+#player_direction_param = openapi.Parameter('direction', openapi.IN_QUERY, description="diretion param")
+player_response = openapi.Response("Get the current position of the player", PlayerSerializer)
 
 # instantiate pusher
 # pusher = Pusher(app_id=config('PUSHER_APP_ID'), key=config('PUSHER_KEY'), secret=config('PUSHER_SECRET'), cluster=config('PUSHER_CLUSTER'))
 
-@csrf_exempt
+# @csrf_exempt
 @api_view(["GET"])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 def initialize(request):
+    """
+    Get the current position of the player
+    """
     user = request.user
     player = user.player
     player_id = player.id
@@ -25,7 +41,12 @@ def initialize(request):
 
 # @csrf_exempt
 @api_view(["POST"])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 def move(request):
+    """
+    Move the player in a particular direction
+    """
     dirs={"n": "north", "s": "south", "e": "east", "w": "west"}
     reverse_dirs = {"n": "south", "s": "north", "e": "west", "w": "east"}
     player = request.user.player
