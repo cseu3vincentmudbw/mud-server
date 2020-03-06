@@ -397,6 +397,6 @@ earlier adventurers.
 """,
 """
 A steep cliff appears before you, falling
-into the darkness...adio moth*#%*$*r!
+into the darkness...!
 """,
 ]
