@@ -12,6 +12,32 @@ class Room(models.Model):
     s_to = models.IntegerField(default=0)
     e_to = models.IntegerField(default=0)
     w_to = models.IntegerField(default=0)
+    x = models.IntegerField(default=0)
+    y = models.IntegerField(default=0)
+
+     #  A wall separates a pair of cells in the N-S or W-E directions.
+    wall_pairs = {'N': 'S', 'S': 'N', 'E': 'W', 'W': 'E'}
+
+    @classmethod
+    def create(cls, x, y):
+        room = cls(x=x, y=y)
+
+        # Room is initially surrounded by walls
+        room.walls = {'N': True, 'S': True, 'E': True, 'W': True}
+
+        return room
+
+    def has_all_walls(self):
+        """Does this room still have all its walls?"""
+
+        return all(self.walls.values())
+
+    def knock_down_wall(self, other, wall):
+        """Knock down the wall between rooms self and other."""
+
+        self.walls[wall] = False
+        other.walls[Room.wall_pairs[wall]] = False
+
     def connectRooms(self, destinationRoom, direction):
         destinationRoomID = destinationRoom.id
         try:
@@ -19,13 +45,13 @@ class Room(models.Model):
         except Room.DoesNotExist:
             print("That room does not exist")
         else:
-            if direction == "n":
+            if direction == "N":
                 self.n_to = destinationRoomID
-            elif direction == "s":
+            elif direction == "S":
                 self.s_to = destinationRoomID
-            elif direction == "e":
+            elif direction == "E":
                 self.e_to = destinationRoomID
-            elif direction == "w":
+            elif direction == "W":
                 self.w_to = destinationRoomID
             else:
                 print("Invalid direction")
@@ -35,6 +61,9 @@ class Room(models.Model):
         return [p.user.username for p in Player.objects.filter(currentRoom=self.id) if p.id != int(currentPlayerID)]
     def playerUUIDs(self, currentPlayerID):
         return [p.uuid for p in Player.objects.filter(currentRoom=self.id) if p.id != int(currentPlayerID)]
+
+    def __str__(self):
+        return self.title
 
 
 class Player(models.Model):
